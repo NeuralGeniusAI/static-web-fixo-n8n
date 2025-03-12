@@ -143,6 +143,7 @@
                     preguntaElemento.addEventListener("click", function () {
                         console.log("Clic en pregunta:", texto);
                         chatInput.value = texto;
+			chatInput.dispatchEvent(new Event('input', { bubbles: true }));
                     });
 
                     container.appendChild(preguntaElemento);
