@@ -72,6 +72,57 @@
 			},
 		},
 	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM cargado");
+
+            function esperarTextareaYAgregarEventos() {
+                const chatInput = document.querySelector(".chat-inputs textarea");
+
+                if (!chatInput) {
+                    console.warn("Esperando textarea...");
+                    setTimeout(esperarTextareaYAgregarEventos, 500);
+                    return;
+                }
+
+                console.log("Textarea encontrado:", chatInput);
+
+                const chatBody = document.querySelector(".chat-body");
+                if (!chatBody) {
+                    console.error("No se encontró .chat-body");
+                    return;
+                }
+
+                const preguntas = [
+                    "¿Qué es una factura comercial y por qué es importante?",
+                    "¿Cómo crear una cuenta en PayPal?",
+		    "Amazon entregó mal mi pedido",
+		    "Quiero solicitar el cambio de sucursal",
+		    "¿Cómo compro online con Fixo Cargo?"
+                ];
+
+                const container = document.createElement("div");
+                container.classList.add("containerPreguntas");
+
+                preguntas.forEach((texto) => {
+                    const preguntaElemento = document.createElement("div");
+                    preguntaElemento.classList.add("pregunta");
+                    preguntaElemento.textContent = texto;
+
+                    preguntaElemento.addEventListener("click", function () {
+                        console.log("Clic en pregunta:", texto);
+                        chatInput.value = texto;
+                    });
+
+                    container.appendChild(preguntaElemento);
+                });
+
+                chatBody.appendChild(container);
+            }
+
+            esperarTextareaYAgregarEventos();
+        });
 </script>
 
 <chaindesk-chatbox-standard style="width: 100%; height: 750px" />
